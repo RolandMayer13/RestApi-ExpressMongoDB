@@ -1,0 +1,19 @@
+{
+  "name": "restapi-expressmongodb",
+  "version": "1.0.0",
+  "description": "Build A REST API With Node.js, Express, & MongoDB - Quick",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20"
+  }
+}
