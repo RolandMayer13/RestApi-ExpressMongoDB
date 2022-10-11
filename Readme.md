@@ -65,3 +65,17 @@ db.once('open', () => console.log('Connected to Database'))
 
 app.listen(3000, () => console.log('Server Started'))
 ```
+- Create environment variable for connection string
+```
+// .env
+DATABASE_URL=mongodb://localhost/subscribers
+```
+- Replace connection string with environment variable
+```js
+// server.js
+require('dotenv').config()
+
+...
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+...
+```
