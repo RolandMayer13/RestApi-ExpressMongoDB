@@ -1,5 +1,6 @@
 # Build A REST API With Node.js, Express, & MongoDB - Quick
-https://www.youtube.com/watch?v=fgTGADljAeg
+This project was created from a tutorial by Web Dev Simplified.  
+Watch YouTube video [Build A REST API With Node.js, Express, & MongoDB - Quick](https://www.youtube.com/watch?v=fgTGADljAeg) by [Web Dev Simplified](https://www.youtube.com/c/WebDevSimplified).
 
 - Create project folder
 - Navigate inside project folder
