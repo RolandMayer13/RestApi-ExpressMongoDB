@@ -79,3 +79,53 @@ require('dotenv').config()
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
 ...
 ```
+- Setup routes
+```js
+// server.js
+...
+db.once('open', () => console.log('Connected to Database'))
+
+// new code starts here
+app.use(express.json())
+
+const subscribersRouter = require('./routes/subscribers')
+// localhost:3000/subscribers
+app.use('/subscribers', subscribersRouter)
+// new code ends here
+
+...
+```
+- Create `routes` folder
+- Create `subscribers.js` file in `routes` folder
+```js
+// subscribers.js
+const express = require('express')
+const router = express.Router()
+
+// Getting all
+router.get('/', (req, res) => {
+  res.send('Hello World')
+})
+
+// Getting one
+router.get('/:id', (req, res) => {
+
+})
+
+// Creating one
+router.post('/', (req, res) => {
+
+})
+
+// Updating one
+router.patch('/:id', (req, res) => {
+
+})
+
+// Deleting one
+router.delete('/:id', (req, res) => {
+
+})
+
+module.exports = router
+```
