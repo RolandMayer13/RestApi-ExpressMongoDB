@@ -2,6 +2,12 @@
 This project was created from a tutorial by Web Dev Simplified.  
 Watch YouTube video [Build A REST API With Node.js, Express, & MongoDB - Quick](https://www.youtube.com/watch?v=fgTGADljAeg) by [Web Dev Simplified](https://www.youtube.com/c/WebDevSimplified).
 
+## Tools used in this project
+- [VSCode](https://code.visualstudio.com/)
+  - [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) extension by Huachao Mao
+- [Docker](https://www.docker.com/)
+
+## Step-by-step instructions to create project
 - Create project folder
 - Navigate inside project folder
 - Open terminal
@@ -109,7 +115,7 @@ router.get('/', (req, res) => {
 
 // Getting one
 router.get('/:id', (req, res) => {
-
+  res.send(req.params.id)
 })
 
 // Creating one
@@ -128,4 +134,14 @@ router.delete('/:id', (req, res) => {
 })
 
 module.exports = router
+```
+- Install [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) extension in [VSCode](https://code.visualstudio.com/)
+- Create `route.rest` file in `routes` folder
+```js
+// routes.rest
+GET http://localhost:3000/subscribers
+
+###
+
+GET http://localhost:3000/subscribers/12
 ```
