@@ -145,3 +145,27 @@ GET http://localhost:3000/subscribers
 
 GET http://localhost:3000/subscribers/12
 ```
+- Create `models` folder
+- Create `subscriber.js` file in `models` folder
+```js
+// models/subscriber.js
+const mongoose = require('mongoose')
+
+const subscriberSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  subscribedToChannel: {
+    type: String,
+    required: true
+  },
+  subscribeData: {
+    type: Date,
+    required: true,
+    default: Date.now
+  }
+})
+
+module.exports = mongoose.model('Subscriber', subscriberSchema)
+```
