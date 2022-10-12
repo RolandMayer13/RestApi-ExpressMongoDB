@@ -1,6 +1,35 @@
 // routes.rest
+
+###
+// Get all
 GET http://localhost:3000/subscribers
 
 ###
+// Get one by ID
+// Update ID in URL for the record you want returned
+GET http://localhost:3000/subscribers/634714df05ec73c573cf34f9
 
-GET http://localhost:3000/subscribers/12
+###
+// Create one
+POST http://localhost:3000/subscribers
+Content-Type: application/json
+
+{
+  "name": "Amazing Person",
+  "subscribedToChannel": "Web Dev Simplified"
+}
+
+###
+// Delete one by ID
+// Update ID in URL for the record you want to delete
+DELETE http://localhost:3000/subscribers/634714df05ec73c573cf34f9
+
+###
+// Update one by ID
+// Update ID in URL for the record you want updated
+PATCH http://localhost:3000/subscribers/634714df05ec73c573cf34f9
+Content-Type: application/json
+
+{
+  "name": "New Name"
+}
