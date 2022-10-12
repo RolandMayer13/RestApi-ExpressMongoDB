@@ -169,3 +169,128 @@ const subscriberSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('Subscriber', subscriberSchema)
 ```
+- Implement REST calls
+```js
+// routes/subscribers.js
+const express = require('express')
+const router = express.Router()
+const Subscriber = require('../models/subscriber')
+
+// Getting all
+router.get('/', async (req, res) => {
+  try {
+    const subscribers = await Subscriber.find()
+    res.json(subscribers)
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
+
+// Getting one
+router.get('/:id', getSubscriber, (req, res) => {
+  res.json(res.subscriber)
+})
+
+// Creating one
+router.post('/', async (req, res) => {
+  const subscriber = new Subscriber({
+    name: req.body.name,
+    subscribedToChannel: req.body.subscribedToChannel
+  })
+  try {
+    const newSubscriber = await subscriber.save()
+    res.status(201).json(newSubscriber)
+  } catch (err) {
+    res.status(400).json({ message: err.message })
+  }
+})
+
+// Updating one
+router.patch('/:id', getSubscriber, async (req, res) => {
+  if (req.body.name != null) {
+    res.subscriber.name = req.body.name
+  }
+  if (req.body.subscribedToChannel != null) {
+    res.subscriber.subscribedToChannel = req.body.subscribedToChannel
+  }
+  try {
+    const updatedSubscriber = await res.subscriber.save()
+    res.json(updatedSubscriber)
+  } catch (err) {
+    res.status(400).json({ message: err.message })
+  }
+})
+
+// Deleting one
+router.delete('/:id', getSubscriber, async (req, res) => {
+  try {
+    await res.subscriber.remove()
+    res.json({ message: 'Deleted Subscriber' })
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
+
+// Middleware
+async function getSubscriber(req, res, next) {
+  let subscriber
+  try {
+    subscriber = await Subscriber.findById(req.params.id)
+    if (subscriber == null) {
+      return res.status(404).json({ message: 'Cannot find subscriber' })
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message })
+  }
+
+  // Set subscriber in response
+  res.subscriber = subscriber
+  next()
+}
+
+module.exports = router
+```
+- Test REST calls
+```js
+// routes.rest
+
+###
+// Get all
+GET http://localhost:3000/subscribers
+
+###
+// Get one by ID
+// Update ID in URL for the record you want returned
+GET http://localhost:3000/subscribers/634714df05ec73c573cf34f9
+
+###
+// Create one
+POST http://localhost:3000/subscribers
+Content-Type: application/json
+
+{
+  "name": "Amazing Person",
+  "subscribedToChannel": "Web Dev Simplified"
+}
+
+###
+// Delete one by ID
+// Update ID in URL for the record you want to delete
+DELETE http://localhost:3000/subscribers/634714df05ec73c573cf34f9
+
+###
+// Update one by ID
+// Update ID in URL for the record you want updated
+PATCH http://localhost:3000/subscribers/634714df05ec73c573cf34f9
+Content-Type: application/json
+
+{
+  "name": "New Name"
+}
+```
+- Stop express.js project by pressing `CTRL-C` in terminal
+- Stop and remove MongoDB docker container
+```Terminal
+> docker stop mongodb
+> docker rm mongodb
+```
